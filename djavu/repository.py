@@ -2,22 +2,11 @@ from djavu.db import get_db
 from werkzeug.security import generate_password_hash
 
 class userRepository:
-    def list_users(self):
-        db = get_db()
-        #return db.execute(
-        #    'SELECT * FROM user'
-        #).fetchall()
-        rows = db.execute(
+    async def list_users(self):
+        db = await get_db()
+        users = db.execute(
             'SELECT * FROM user'
         ).fetchall()
-        users = []
-        for i in rows:
-            user = {}
-            user["username"] = i["username"]
-            user["fullname"] = i["fullname"]
-            user["email"] = i["email"]
-            user["password"] = i["password"]
-            users.append(user)
         return users
 
 

@@ -13,7 +13,6 @@ bp = Blueprint('register', __name__, url_prefix='/')
 repo = userRepository()
 
 @bp.route('/users')
-def users():
-    users = repo.list_users()
-    return jsonify(users)
-    #return jsonify(render_template('users.html', users=users))
+async def users():
+    users =  await repo.list_users()
+    return await render_template('users.html', users=users)
